@@ -267,28 +267,31 @@ const BikeGame: React.FC = () => {
   return (
     <div 
       ref={gameContainerRef} 
-      className="game-container relative h-screen max-w-screen overflow-hidden"
+      className="game-container relative h-screen max-w-screen-lg w-full overflow-hidden"
     >
       {/* Road and background */}
       <div className="relative w-full h-full">
-        <Road gameSpeed={gameSpeed} />
-        
-        {/* Obstacles */}
-        {obstacles.map(obstacle => (
-          <Obstacle 
-            key={obstacle.id}
-            x={obstacle.x}
-            y={obstacle.y}
-            speed={obstacle.speed}
-          />
-        ))}
-        
-        {/* Player bike */}
-        <Bike position={bikePosition} isCollided={isCollided} />
-        
-        {/* HUD */}
-        {gameState === GameState.PLAYING && (
-          <HUD score={score} lives={lives} level={level} />
+        {/* Only render game elements when playing */}
+        {(gameState === GameState.PLAYING || gameState === GameState.PAUSED) && (
+          <>
+            <Road gameSpeed={gameSpeed} />
+            
+            {/* Obstacles */}
+            {obstacles.map(obstacle => (
+              <Obstacle 
+                key={obstacle.id}
+                x={obstacle.x}
+                y={obstacle.y}
+                speed={obstacle.speed}
+              />
+            ))}
+            
+            {/* Player bike */}
+            <Bike position={bikePosition} isCollided={isCollided} />
+            
+            {/* HUD */}
+            <HUD score={score} lives={lives} level={level} />
+          </>
         )}
       </div>
       
