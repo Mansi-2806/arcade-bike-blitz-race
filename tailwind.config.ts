@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Game specific colors
+				neon: {
+					cyan: '#0ff',
+					green: '#0f0',
+					magenta: '#f0f',
+					yellow: '#ff0',
+				},
+				game: {
+					dark: '#121212',
+					road: '#333',
+					line: '#fff',
 				}
 			},
 			borderRadius: {
@@ -70,25 +83,36 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'road-move': {
+					from: { transform: 'translateY(0)' },
+					to: { transform: 'translateY(100%)' }
+				},
+				'obstacle-move': {
+					from: { top: '-100px' },
+					to: { top: '100%' }
+				},
+				'glow': {
+					'0%, 100%': { filter: 'drop-shadow(0 0 5px currentColor)' },
+					'50%': { filter: 'drop-shadow(0 0 15px currentColor)' }
+				},
+				'flash': {
+					'0%, 50%, 100%': { opacity: '1' },
+					'25%, 75%': { opacity: '0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'road-move': 'road-move 1s linear infinite',
+				'glow': 'glow 1.5s ease-in-out infinite',
+				'flash': 'flash 0.5s ease-in-out'
 			}
 		}
 	},
