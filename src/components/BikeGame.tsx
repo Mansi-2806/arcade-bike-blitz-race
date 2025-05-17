@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Bike from './Bike';
 import Obstacle from './Obstacle';
@@ -25,6 +24,7 @@ const INITIAL_SPEED = 50;
 const LEVEL_UP_SCORE = 100;
 
 const BikeGame: React.FC = () => {
+  // Use MENU as the default state to ensure the menu is displayed on load
   const [gameState, setGameState] = useState<GameState>(GameState.MENU);
   const [bikePosition, setBikePosition] = useState(ROAD_WIDTH / 2);
   const [obstacles, setObstacles] = useState<Array<{id: number, x: number, y: number, speed: number}>>([]);
@@ -264,10 +264,13 @@ const BikeGame: React.FC = () => {
     setGameState(GameState.MENU);
   };
   
+  // Debug to check game state
+  console.log('Current game state:', gameState);
+
   return (
     <div 
       ref={gameContainerRef} 
-      className="game-container relative h-screen max-w-screen-lg w-full overflow-hidden"
+      className="game-container relative h-screen max-w-screen-lg w-full overflow-hidden bg-game-dark"
     >
       {/* Road and background */}
       <div className="relative w-full h-full">
@@ -295,7 +298,7 @@ const BikeGame: React.FC = () => {
         )}
       </div>
       
-      {/* Game states/overlays */}
+      {/* Game states/overlays - Make sure they're always above other elements */}
       {gameState === GameState.MENU && (
         <GameMenu 
           onStartGame={handleStartGame}
